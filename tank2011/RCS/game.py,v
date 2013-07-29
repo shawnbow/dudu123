@@ -1,0 +1,239 @@
+head	1.2;
+access;
+symbols;
+locks
+	shiweifu:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2011.04.03.15.35.12;	author shiweifu;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2011.04.03.13.33.21;	author shiweifu;	state Exp;
+branches;
+next	;
+
+
+desc
+@game object
+@
+
+
+1.2
+log
+@重新设计定义了一些类型，完善了注释
+@
+text
+@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+#game.py
+
+
+#       Redistribution and use in source and binary forms, with or without
+#       
+#       modification, are permitted provided that the following conditions are
+#       
+#       met:
+#       
+#       
+#       
+#       * Redistributions of source code must retain the above copyright
+#       
+#         notice, this list of conditions and the following disclaimer.
+#       
+#       * Redistributions in binary form must reproduce the above
+#       
+#         copyright notice, this list of conditions and the following disclaimer
+#       
+#         in the documentation and/or other materials provided with the
+#       
+#         distribution.
+#       
+#       * Neither the name of the  nor the names of its
+#       
+#         contributors may be used to endorse or promote products derived from
+#       
+#         this software without specific prior written permission.
+#       
+#       
+#       
+#       THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+#       
+#       "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+#       
+#       LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+#       
+#       A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+#       
+#       OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#       
+#       SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+#       
+#       LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+#       
+#       DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+#       
+#       THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+#       
+#       (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+#       
+#       OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#       
+
+
+from lib import *
+
+class Tank(pygame.sprite.Sprite):
+    #初始化的时候通过坦克名称，加载坦克信息
+    def __init__(self,pos,direct,config):
+        pass
+    
+    def __load(self,config):
+        """
+        通过配置文件来读取坦克的参数，包括：
+        1、坦克四个方向的图片，这样可以由玩家来定制坦克
+        2、坦克移动速度
+        3、坦克发炮声音
+        4、血量
+        5、坦克类型名
+        
+        config接受的是读取到包含坦克信息的字典结构
+        """
+        pass
+    
+    def update(self):
+        pass
+        
+    
+class Drone(Tank):
+    """敌人坦克"""
+    def __init__(self,name="normal"):
+        Tank.__init__(self)
+    
+    def update(self):
+        pass
+
+class Player(Tank):
+    """玩家1"""
+    def __init__(self,control):
+        """
+        control:控制坦克的按键,由构造函数来传递
+        
+        """
+        pass
+    
+    def update(self):
+        """处理up down left right"""
+        pass
+
+class Stage():
+    """关卡,包括:
+    1、开始动画
+    2、地图信息
+    3、关卡坦克信息
+    
+    Game对象通过获取Stage对象的信息，来初始化场景、坦克等
+    """
+    
+    def __init__(self,p):
+        pass
+        
+    def __load_stage():
+        """加载地图"""
+        pass
+
+    def __load_map():
+        """加载地图"""
+        pass
+
+    def __load_data():
+        """加载开始动画"""
+        pass
+
+    def __load_info():
+        """加载初始化坦克信息"""
+        pass
+
+class Game:
+    """游戏主要对象"""    
+    def __init__(self,screen):
+        self.screen = screen
+        
+        #玩家，设计成组方便增加玩家
+        self.players = pygame.sprite.Grouup()
+        #敌人
+        self.drones = pygame.sprite.Grouup()
+        #子弹
+        self.bullet = pygame.sprite.Group()
+        #地图,由函数来填充其中的位置
+        self._map = pygame.sprite.Group()
+        
+        
+        #地图
+        
+        pass
+        
+    def next_stage(self):
+        """下一关,加载下一个地图"""
+        pass
+    
+    def load_data(self):
+        """初始化时加载所有的游戏数据"""
+        pass
+    
+    def create_drones(self):
+        """创建敌方坦克,根据地图信息"""
+    
+    def game_over(self):
+        pass
+    
+    def run(self):
+        pass
+    
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d60 2
+d64 1
+a64 1
+    def __init__(self):
+d67 11
+a77 1
+    def __load(self,n):
+d92 1
+a92 1
+class Player1(Tank):
+d94 5
+a98 1
+    def __init__(self):
+a132 10
+class Player2(Player1):
+    """玩家2"""
+    def __init__(self):
+        pass
+    
+    def update(self):
+        """处理wsad"""
+        pass
+
+
+d135 4
+a138 2
+    def __init__(self):
+        #玩家
+d142 5
+d153 1
+a153 1
+        """下一关"""
+d160 3
+@

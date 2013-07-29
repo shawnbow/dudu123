@@ -1,0 +1,180 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	2011.04.03.15.34.54;	author shiweifu;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2011.04.03.13.33.14;	author shiweifu;	state Exp;
+branches;
+next	;
+
+
+desc
+@libary for mygame
+@
+
+
+1.2
+log
+@实现了一些常用的功能
+@
+text
+@#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+#       lib.py
+#       
+#       
+#       
+#       Copyright 2011 shiweifu <shiweifu@@126.com>
+#       
+#       
+#       
+#       This program is free software; you can redistribute it and/or modify
+#       
+#       it under the terms of the GNU General Public License as published by
+#       
+#       the Free Software Foundation; either version 2 of the License, or
+#       
+#       (at your option) any later version.
+#       
+#       
+#       
+#       This program is distributed in the hope that it will be useful,
+#       
+#       but WITHOUT ANY WARRANTY; without even the implied warranty of
+#       
+#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#       
+#       GNU General Public License for more details.
+#       
+#       
+#       
+#       You should have received a copy of the GNU General Public License
+#       
+#       along with this program; if not, write to the Free Software
+#       
+#       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#       
+#       MA 02110-1301, USA.
+#       
+
+#这个文件里主要是一些公共的函数和类
+
+import pygame
+import os
+import sys
+
+yellow = (230,233,90)    
+white = (255,255,255)
+black = (0,0,0)
+
+debug = True
+
+def debug_print(*s):
+    if debug == True:
+        if len(s) == 1:
+            print(s[0])
+        else:
+            print(s)
+
+class MyFonter:
+    def __init__(self,txt,c,s,p,background = (0,0,0),font_name = "Arial",font_size = 50):
+        self.txt = txt
+        self._color = c
+        self.font = pygame.font.SysFont(font_name,font_size)
+        self._screen = s
+        self._pos = p
+        self.render()
+        
+    def set_color(self,c):
+        self._color = c
+        self.render()
+    
+    def render(self):
+        self.r = self.font.render(self.txt, 1, self._color,(0,0,0))
+
+    def draw(self):
+        self._screen.blit(self.r,self._pos)
+
+def pos_in_rect(pos,left_pos,size):
+    if pos[0] > left_pos[0] and pos[1] > left_pos[1] and \
+       pos[0] < (left_pos[0] + size[0]) and pos[1] < (left_pos[1] + size[1]):
+        return True
+    return False
+
+#加载字体
+def load_font(f,size=30):
+    f = os.path.join('res', f)
+    try:
+        font = pygame.font.Font(f,size)
+    except pygame.error:
+        raise SystemExit, 'Could not load font "%s" %s'%(file, pygame.get_error())
+    return font
+
+#加载图片
+def load_image(file,p="res"):
+    "loads an image, prepares it for play"
+    #~ if p == None:
+        #~ file = os.path.join('res', file)
+    #~ else:
+        #~ file = os.path.join('res', file)
+    file = os.path.join(p, file)
+    
+    try:
+        surface = pygame.image.load(file)
+    except pygame.error:
+        raise SystemExit, 'Could not load image "%s" %s'%(file, pygame.get_error())
+    return surface.convert_alpha()
+
+def load_images(files,p):
+    imgs = []
+    for file in files:
+        imgs.append(load_image(file,p))
+    return imgs
+
+#加载音频
+class dummysound:
+    def play(self): pass
+
+def load_sound(file):
+    if not pygame.mixer: return dummysound()
+    file = os.path.join('res', file)
+    try:
+        sound = pygame.mixer.Sound(file)
+        return sound
+    except pygame.error:
+        print 'Warning, unable to load,', file
+    return dummysound()
+
+
+
+
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d4 1
+a4 1
+#       未命名.py
+d41 88
+a130 3
+def main():
+	
+	return 0
+a131 2
+if __name__ == '__main__':
+	main()
+@

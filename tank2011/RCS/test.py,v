@@ -1,0 +1,119 @@
+head	1.2;
+access;
+symbols;
+locks
+	shiweifu:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2011.04.04.05.04.38;	author shiweifu;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2011.04.03.15.35.40;	author shiweifu;	state Exp;
+branches;
+next	;
+
+
+desc
+@这个是新增加的文件，用于测试。
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""用于测试游戏中的功能的垃圾代码集散地"""
+
+#       Redistribution and use in source and binary forms, with or without
+#       modification, are permitted provided that the following conditions are
+#       met:
+#       
+#       * Redistributions of source code must retain the above copyright
+#         notice, this list of conditions and the following disclaimer.
+#       * Redistributions in binary form must reproduce the above
+#         copyright notice, this list of conditions and the following disclaimer
+#         in the documentation and/or other materials provided with the
+#         distribution.
+#       * Neither the name of the  nor the names of its
+#         contributors may be used to endorse or promote products derived from
+#         this software without specific prior written permission.
+#       
+#       THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+#       "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+#       LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+#       A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+#       OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#       SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+#       LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+#       DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+#       THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+#       (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+#       OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#       
+
+import os
+import sys
+import pygame
+from sys import exit
+from pygame.locals import *
+from copy import copy
+import time
+import random
+import math
+import lib
+import glob
+from zipfile import *
+import json
+
+
+def to_tmp(p):
+    zf = ZipFile(p,"r")
+    
+    p = os.getcwd() + os.path.sep + "tmp" + os.path.sep
+    print p
+    ioconv = zf.extractall(p)
+    zf.close()
+
+def read_map_cfg():
+    p = os.getcwd() + os.sep + "tmp" + os.sep + "map.cfg"
+    
+    f = open(p,"r")
+    txt = "".join(f.readlines())
+    f.close()
+    print txt
+    dic = json.loads(txt)
+    print dic
+
+def main():
+    files = glob.glob("data/map/*.zip")
+    for f in files:
+        #to_tmp(f)
+        read_map_cfg()
+        
+        
+    return 0
+
+if __name__ == '__main__':
+    main()
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d45 1
+d63 2
+a64 1
+    eval(txt)
+@

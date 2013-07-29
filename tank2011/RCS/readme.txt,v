@@ -1,0 +1,161 @@
+head	1.3;
+access;
+symbols;
+locks
+	shiweifu:1.3; strict;
+comment	@# @;
+
+
+1.3
+date	2011.04.04.05.05.52;	author shiweifu;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2011.04.03.15.37.48;	author shiweifu;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2011.04.03.13.33.02;	author shiweifu;	state Exp;
+branches;
+next	;
+
+
+desc
+@readme
+@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@几种配置文件信息：
+1、坦克信息
+#坦克信息
+tank =
+{
+	#单位是像素
+	"name" : "normal",
+	"speed" : 5,
+	"image" : 
+			{
+				"left":"left.jpg",
+				"right":"right.jpg",
+				"up":"up.jpg",
+				"down":"down.jpg"
+			}
+}
+
+每个敌方坦克信息都可以单独加载，包含四个方向的图片和移动速度、攻击力等参数，加载参数之后才进行初始化
+
+2、地图信息伪代码:
+map_info =
+{
+
+	"background" : "xx.jpg",
+    "backcolor" : [0,0,0],
+	"tank_info" : 
+	{
+		#这是各种出场坦克名字
+		"normal":5,
+		"hard":5
+	},
+    "player" : "normal",
+    "slash" : ["1.jpg","2.jpg","3.jpg","4.jpg"],
+    "sound" : "xx.wav"
+}
+
+地图文件应该是个独立的压缩包，用tar或zip格式压缩。使用时解压到tmp文件夹下。
+每个压缩包内有个map.cfg文件，里面包含该地图、场景的配置信息：
+地图还应包括开场动画，由几张图片组成。保存到slash文件夹下。
+包括声音文件，也由初始化地图时进行加载。格式为wav。
+背景颜色或背景图片：选填一个。如果同时设置，则以background为主，以居中方式贴到背景中。
+
+@
+
+
+1.2
+log
+@增加些注释
+@
+text
+@d1 42
+a42 42
+几种配置文件信息：
+1、坦克信息
+#坦克信息
+tank =
+{
+	#单位是像素
+	"name" : "normal"
+	"speed" : 5,
+	"image" : 
+			{
+				"left":"left.jpg",
+				"right":"right.jpg",
+				"up":"up.jpg",
+				"down":"down.jpg"
+			}
+}
+
+每个敌方坦克信息都可以单独加载，包含四个方向的图片和移动速度、攻击力等参数，加载参数之后才进行初始化
+
+2、地图信息伪代码:
+map_info =
+{
+
+	"background" : "xx.jpg",
+    "backcolor" : [0,0,0],
+	"tank_info" : 
+	{
+		#这是各种出场坦克名字
+		"normal":5,
+		"hard":5
+	},
+    "player" : "normal",
+    "slash" : ["1.jpg","2.jpg","3.jpg","4.jpg"],
+    "sound" : "xx.wav"
+}
+
+地图文件应该是个独立的压缩包，用tar或zip格式压缩。使用时解压到tmp文件夹下。
+每个压缩包内有个map.cfg文件，里面包含该地图、场景的配置信息：
+地图还应包括开场动画，由几张图片组成。保存到slash文件夹下。
+包括声音文件，也由初始化地图时进行加载。格式为wav。
+背景颜色或背景图片：选填一个。如果同时设置，则以background为主，以居中方式贴到背景中。
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 2
+a2 12
+#地图信息
+map_info = 
+{
+	"background" = "xx.jpg",
+	"tank_info" = 
+	{
+		#这是坦克名字
+		"normal"=5,
+		"hard"=5
+	}
+}
+
+d4 1
+a4 1
+tank = 
+d7 3
+a9 3
+	"name" = "normal"
+	"speed" = 5,
+	"image" = 
+d18 25
+a42 1
+每个敌方坦克信息都可以单独加载，包含四个方向的图片和移动速度、攻击力等参数，加载参数之后才进行初始化@
