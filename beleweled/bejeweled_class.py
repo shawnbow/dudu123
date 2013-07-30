@@ -1,9 +1,13 @@
+#coding=utf-8
 import pygame
 import sys
 import copy
 import random
 import time
 from pygame.locals import *
+
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 windowWidth,windowHeight=(800,600)
 boardWidth,boardHeight=(8,8)        #8 * 8
