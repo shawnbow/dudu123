@@ -1,17 +1,20 @@
-import mymodule
+import test_module1
+import test_module2
+import sys
 
-b = 100
+g_pytest = 1
 
-class C1:
-    def __init__(self):
-        self.a = 1
+def main():
+    print g_pytest
+    
+    test_module1.func1()
+    
+    print g_pytest
+    
+    test_module2.func2()
+    
+    print g_pytest
 
-def set(num):
-    mymodule.a = num
-    global b
-    b = 10
-    print mymodule.a, b
-
-c = C1()
-mydic = {type:123, type:12312}
-print mydic
+if __name__ == '__main__':
+    main()
+    print sys.modules
