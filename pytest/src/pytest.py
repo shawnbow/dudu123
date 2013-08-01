@@ -1,20 +1,11 @@
-import test_module1
-import test_module2
 import sys
-
-g_pytest = 1
+from xml.etree import ElementTree
 
 def main():
-    print g_pytest
+    root = ElementTree.parse('2013-07-23_pxa988-jb4.2_beta2.xml').getroot()
+    #iters = root.iter("project")
+    print root[3].text.join('123')
+    print '-'.join((x*2 for x in ('fuck1','fuck')))
     
-    test_module1.func1()
-    
-    print g_pytest
-    
-    test_module2.func2()
-    
-    print g_pytest
-
 if __name__ == '__main__':
     main()
-    print sys.modules
