@@ -7,8 +7,7 @@ import game
 import pygame
 from pygame.locals import *
 
-window_width = 412
-window_heigth = 426
+window_width, window_heigth = (540, 536)
 
 def main():
     # Initial pygame
