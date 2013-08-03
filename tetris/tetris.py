@@ -29,12 +29,14 @@ class Room(object):
         self.space = list([0]*Room.Width*Room.Heigth)
     
     def set_space(self, (x, y), value):
-        if (x >= Room.Width or y <= Room.Heigth):
+        if x not in range(Room.Width) or y not in range(Room.Heigth) :
             raise ValueError, (x, y), value
         self.space[x+y*Room.Width] = value
         print 'Board (%s,%s)' %(x, y), 'set to %s' %value
     
     def get_space(self, (x, y)):
+        if x not in range(Room.Width) or y not in range(Room.Heigth) :
+            raise ValueError, (x, y)
         return self.space[x+y*Room.Width]
 
     def empty_space(self):
@@ -139,9 +141,23 @@ class Game(object):
         
         return True
     
-    def can_board_move(self, board, direction):
-        new_position = 
-        posit = [[0]*2 for i in range(board.count)]
+    def move_board(self, board, direction):
+        if direction == 0:
+            next_position = (board.position[0]-1, board.position[1])
+        elif direction == 1:
+            next_position = (board.position[0]+1, board.position[1])
+        elif direction == 2:
+            next_position = (board.position[0], board.position[1]-1)
+        else:
+            return
+        
+        for i in range(board.count):
+            x = board.shape[i][0] + next_position[0]
+            y = board.shape[i][1] + next_position[1]
+            if self.room.get_space((x, y)) != 0:
+                return 
+        
+        board.position = next_position
         
     
     def draw_square(self, x, y, color):
@@ -162,7 +178,7 @@ class Game(object):
 
     def run(self):
         b = Board(1)
-        b.position = (9,5)
+        b.position = (5,17)
        
         while True:
             for event in pygame.event.get():
@@ -173,6 +189,7 @@ class Game(object):
             #self.backsurface.blit(self.background,(0,0))
             self.screen.blit(self.background,(0,0))
             self.draw_room()
+            self.move_board(b, 2)
             if self.can_board_rotate(b):
                 b.rotate()
             self.draw_board(b)

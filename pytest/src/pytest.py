@@ -7,5 +7,6 @@ def main():
     print root[3].text.join('123')
     print '-'.join((x*2 for x in ('fuck1','fuck')))
     
+    
 if __name__ == '__main__':
     main()
