@@ -2,6 +2,7 @@
 #coding=utf-8
 import sys
 import pygame
+import copy
 from pygame.locals import *
 
 # reload(sys)
@@ -22,6 +23,7 @@ class Room(object):
 
     # 10*18 space
     Width, Heigth = (10,18)
+    
 
     def __init__(self):
         self.space = list([0]*Room.Width*Room.Heigth)
@@ -45,6 +47,7 @@ class Board(object):
     def __init__(self, style):
         self.style = style
         self.color = color_table[self.style]
+        self.clockwise = 1
         # oooo
         if self.style == 1: 
             self.count = 4
@@ -88,15 +91,27 @@ class Board(object):
             self.shape = [[0,0],[-1,0],[-1,-1],[0,-1]]
         else:
             raise ValueError, 'Style %s not support'%self.style
-        
+    
+    def pre_rotate(self, next_shape):
+        clockwise = self.clockwise
+        if self.style == 7:
+            return
+        elif self.style in (1, 4, 5):
+            clockwise = -1*clockwise
+        for i in range(self.count):
+            x = self.shape[i][1]*clockwise*-1
+            y = self.shape[i][0]*clockwise
+            next_shape[i][0] = x
+            next_shape[i][1] = y
+    
     def rotate(self):
         if self.style == 7:
-            return 
-        elif self.style == 1:
-            
+            return
+        elif self.style in (1, 4, 5):
+            self.clockwise = -1*self.clockwise
         for i in range(self.count):
-            x = self.shape[i][1]*-1
-            y = self.shape[i][0]
+            x = self.shape[i][1]*self.clockwise*-1
+            y = self.shape[i][0]*self.clockwise
             self.shape[i][0] = x
             self.shape[i][1] = y
 
@@ -110,6 +125,24 @@ class Game(object):
         # Create surface for display
         #self.backsurface = pygame.Surface(self.screen.get_size())
         self.background = pygame.image.load('background.png').convert()
+    
+    def can_board_rotate(self, board):
+        next_shape = [[0]*2 for i in range(board.count)]
+        board.pre_rotate(next_shape)
+        for i in range(board.count):
+            x = next_shape[i][0] + board.position[0]
+            y = next_shape[i][1] + board.position[1]
+            if (x not in range(Room.Width) or y not in range(Room.Heigth)) :
+                return False
+            if (self.room.get_space((x, y)) != 0):
+                return False
+        
+        return True
+    
+    def can_board_move(self, board, direction):
+        new_position = 
+        posit = [[0]*2 for i in range(board.count)]
+        
     
     def draw_square(self, x, y, color):
         pygame.draw.rect(self.screen, color,
@@ -129,7 +162,8 @@ class Game(object):
 
     def run(self):
         b = Board(1)
-        b.position = (5,5)
+        b.position = (9,5)
+       
         while True:
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -139,10 +173,11 @@ class Game(object):
             #self.backsurface.blit(self.background,(0,0))
             self.screen.blit(self.background,(0,0))
             self.draw_room()
-            b.rotate()
+            if self.can_board_rotate(b):
+                b.rotate()
             self.draw_board(b)
             pygame.display.flip()
-            self.clock.tick(5)
+            self.clock.tick(2)
         pass
 
 
