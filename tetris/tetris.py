@@ -154,11 +154,23 @@ class Game(object):
         for i in range(board.count):
             x = board.shape[i][0] + next_position[0]
             y = board.shape[i][1] + next_position[1]
-            if self.room.get_space((x, y)) != 0:
+            
+            if x not in range(Room.Width) or y not in range(Room.Heigth):
                 return 
-        
+            
+            if self.room.get_space((x, y)) != 0:
+                if direction == 0 or direction == 1:
+                    return
+                elif direction == 2:
+                    self.drop_board(board)
+                    return
         board.position = next_position
-        
+    
+    def drop_board(self, board):
+        for i in range(board.count):
+            x = board.shape[i][0] + board.position[0]
+            y = board.shape[i][1] + board.position[1]
+            self.room.set_space((x, y), board.style)
     
     def draw_square(self, x, y, color):
         pygame.draw.rect(self.screen, color,
@@ -179,6 +191,7 @@ class Game(object):
     def run(self):
         b = Board(1)
         b.position = (5,17)
+        self.room.set_space((5, 0), 4)
        
         while True:
             for event in pygame.event.get():
@@ -189,9 +202,11 @@ class Game(object):
             #self.backsurface.blit(self.background,(0,0))
             self.screen.blit(self.background,(0,0))
             self.draw_room()
-            self.move_board(b, 2)
+            
             if self.can_board_rotate(b):
                 b.rotate()
+            #self.move_board(b, 1)
+            self.move_board(b, 2)
             self.draw_board(b)
             pygame.display.flip()
             self.clock.tick(2)
