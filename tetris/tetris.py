@@ -9,6 +9,7 @@ from pygame.locals import *
 # sys.setdefaultencoding("utf-8")
 window_width, window_heigth = (540, 536)
 
+
 color_table = ((0, 0, 0),
                (0, 0, 255), 
                (0, 255, 0),
@@ -149,7 +150,7 @@ class Game(object):
         elif direction == 2:
             next_position = (board.position[0], board.position[1]-1)
         else:
-            return
+            return 0
         
         for i in range(board.count):
             x = board.shape[i][0] + next_position[0]
@@ -160,12 +161,13 @@ class Game(object):
             
             if self.room.get_space((x, y)) != 0:
                 if direction == 0 or direction == 1:
-                    return
+                    return 0
                 elif direction == 2:
                     self.drop_board(board)
-                    return
+                    return 2
         board.position = next_position
-    
+        return 1
+
     def drop_board(self, board):
         for i in range(board.count):
             x = board.shape[i][0] + board.position[0]
@@ -198,15 +200,22 @@ class Game(object):
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
+                elif event.type == KEYDOWN:
+                    if event.key == K_DOWN:
+                        if self.move_board(b, 2) == 2: 
+                            b = Board(2)
+                            b.position = (5,17)
+                    elif event.key == K_UP:
+                        if self.can_board_rotate(b):
+                            b.rotate()
+                    elif event.key == K_LEFT:
+                        self.move_board(b, 0)
+                    elif event.key == K_RIGHT:
+                        self.move_board(b, 1)
 
             #self.backsurface.blit(self.background,(0,0))
             self.screen.blit(self.background,(0,0))
             self.draw_room()
-            
-            if self.can_board_rotate(b):
-                b.rotate()
-            #self.move_board(b, 1)
-            self.move_board(b, 2)
             self.draw_board(b)
             pygame.display.flip()
             self.clock.tick(2)
