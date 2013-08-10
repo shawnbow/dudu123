@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import sys
 import test_module2
 #from pytest import g_pytest

@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import test_module1
 import pytest
 
