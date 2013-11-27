@@ -9,7 +9,7 @@ def main():
     
     s = fd.read()
     print s
-    print commands.getstatusoutput('git show')
+    print commands.getstatusoutput('git log ^3a3ad9a84067fa89e720924092c291166b4c357b master')
     
 if __name__ == '__main__':
     main()

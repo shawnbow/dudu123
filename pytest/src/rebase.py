@@ -3,6 +3,8 @@ import os
 import sys
 from xml.etree import ElementTree
 
+rootdir = os.getcwd()
+
 def read_xml(xmlfile = ''):
     project_dict = dict()
     name_set = set()
@@ -39,10 +41,11 @@ def main():
     
     for name in name_set_both:
         if project_dict_new[name][1] != project_dict_old[name][1]:
-            print 'project', project_dict_new[name][0]
-            print 'git checkout -b myrebase'
+            print 'cd %s' % os.path.join(rootdir, project_dict_new[name][0])
+            print 'git checkout -b myrebase m/marvell-android-4.3-ot-dev'
             print 'git rebase --onto ' + project_dict_new[name][1] + ' ' + project_dict_old[name][1] + ' ' + 'myrebase'
-            print 'git push -f aosp myrebase:marvell-android-4.3-ot-dev' 
+            print 'git push -f aosp myrebase:marvell-android-4.3-ot-dev'
+            print ''
             #rebase_project_list.append((project_dict_new[name][0], project_dict_new[name][1], project_dict_old[name][1]) )
     
     for name in name_set_only_new:
